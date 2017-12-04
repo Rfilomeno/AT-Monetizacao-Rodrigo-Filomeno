@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "234546559435",
+    "firebase_url": "https://at-monetizacao.firebaseio.com",
+    "project_id": "at-monetizacao",
+    "storage_bucket": "at-monetizacao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234546559435:android:e49701f6a1a6d23c",
+        "android_client_info": {
+          "package_name": "com.example.rodrigo.at_monetizacao_rodrigo_filomeno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234546559435-v88ijg1no9etumk50o8cirv8cqaltv0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rodrigo.at_monetizacao_rodrigo_filomeno",
+            "certificate_hash": "524063ba48dcc42c15777b1076ba87e9f8773d74"
+          }
+        },
+        {
+          "client_id": "234546559435-d8im0ulklgqr6ipuk7su3v58qjs6shd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYHZc99TAoTIxnFEa-YnYWMgUBp8ZSnS4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234546559435-d8im0ulklgqr6ipuk7su3v58qjs6shd1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

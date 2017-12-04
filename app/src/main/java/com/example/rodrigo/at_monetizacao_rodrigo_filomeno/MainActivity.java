@@ -30,7 +30,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements ValidationListener {
 
     Validator validator;
-    InterstitialAd anuncio;
+    private InterstitialAd mInterstitialAd;
+
 
     @NotEmpty(message = "Campo não pode ficar em branco")
     private EditText Nome;
@@ -59,26 +60,9 @@ public class MainActivity extends AppCompatActivity implements ValidationListene
         validator.setValidationListener(this);
 
 
-        anuncio = new InterstitialAd(this);
-        //chave do admob
-        anuncio.setAdUnitId("ca-app-pub-2048265031968487/7982707743");
-
-        anuncio.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                requestNewInterstitial();
-                Toast.makeText(MainActivity.this, " Obrigado !", Toast.LENGTH_SHORT).show();
-                //limpar os campos edit text
-                Nome.setText("");
-                Email.setText("");
-                Password.setText("");
-                ConfirmPassword.setText("");
-                Cpf.setText("");
-
-
-            }
-        });
-
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         Nome = (EditText) findViewById(R.id.EtNome);
         Email = (EditText) findViewById(R.id.EtEmail);
@@ -90,14 +74,18 @@ public class MainActivity extends AppCompatActivity implements ValidationListene
         MaskTextWatcher mtw = new MaskTextWatcher(Cpf, smf);
         Cpf.addTextChangedListener(mtw);
 
-    }
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-              /*  .addTestDevice("SEE_YOUR_LOGCAT_TO_GET_YOUR_DEVICE_ID")*/
-                .build();
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                Limpar();
+            }
 
-        anuncio.loadAd(adRequest);
+        });
+
     }
+
 
     public void Salvar(View v){
         validator.validate();
@@ -106,7 +94,11 @@ public class MainActivity extends AppCompatActivity implements ValidationListene
 
     @Override
     public void onValidationSucceeded() {
-        anuncio.show();
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Mensagem("The interstitial wasn't loaded yet.");
+        }
         Mensagem("Campos Validados com Sucesso!");
         SalvarNoArquivo();
     }
@@ -152,4 +144,13 @@ public class MainActivity extends AppCompatActivity implements ValidationListene
 
 
     }
+
+    public void Limpar(){
+        Nome.setText("");
+        Email.setText("");
+        Password.setText("");
+        ConfirmPassword.setText("");
+        Cpf.setText("");
+    }
+
 }
